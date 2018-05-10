@@ -1,0 +1,1141 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <title>Untitled</title>
+  <style type="text/css">
+    body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #222;
+  font-size: 100%;
+}
+
+.slide {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 0; right: 0;
+  background-color: #f7f7f7;
+}
+
+.slide-content {
+  width: 800px;
+  height: 600px;
+  overflow: hidden;
+  margin: 80px auto 0 auto;
+  padding: 30px;
+
+  font-weight: 200;
+  font-size: 200%;
+  line-height: 1.375;
+}
+
+.controls {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+
+.arrow {
+  width: 0; height: 0;
+  border: 30px solid #333;
+  float: left;
+  margin-right: 30px;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.prev {
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+
+  border-left-width: 0;
+  border-right-width: 50px;
+}
+
+.next {
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+
+  border-left-width: 50px;
+  border-right-width: 0;
+}
+
+.prev:hover {
+  border-right-color: #888;
+  cursor: pointer;
+}
+
+.next:hover {
+  border-left-color: #888;
+  cursor: pointer;
+}
+
+h1 {
+  font-size: 300%;
+  line-height: 1.2;
+  text-align: center;
+  margin: 170px 0 0;
+}
+
+h2 {
+  font-size: 100%;
+  line-height: 1.2;
+  margin: 5px 0;
+  text-align: center;
+  font-weight: 200;
+}
+
+h3 {
+  font-size: 140%;
+  line-height: 1.2;
+  border-bottom: 1px solid #aaa;
+  margin: 0;
+  padding-bottom: 15px;
+}
+
+ul {
+  padding: 20px 0 0 60px;
+  font-weight: 200;
+  line-height: 1.375;
+}
+
+.author h1 {
+  font-size: 170%;
+  font-weight: 200;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.author h3 {
+  font-weight: 100;
+  text-align: center;
+  font-size: 95%;
+  border: none;
+}
+
+a {
+  text-decoration: none;
+  color: #44a4dd;
+}
+
+a:hover {
+  color: #66b5ff;
+}
+
+pre {
+  font-size: 60%;
+  line-height: 1.3;
+}
+
+.progress {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  z-index: 1;
+}
+
+.progress-bar {
+  width: 0%;
+  height: 3px;
+  background-color: #b4b4b4;
+
+  -webkit-transition: width 0.05s ease-out;
+  -moz-transition: width 0.05s ease-out;
+  -o-transition: width 0.05s ease-out;
+  transition: width 0.05s ease-out;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 850px) {
+
+  body {
+    font-size: 70%;
+  }
+
+  .slide-content {
+    width: auto;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  h1 {
+    margin-top: 120px;
+  }
+
+  .prev, .prev:hover {
+    border-right-color: rgba(135, 135, 135, 0.5);
+  }
+
+  .next, .next:hover {
+    border-left-color: rgba(135, 135, 135, 0.5);
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 50%;
+    overflow: hidden;
+  }
+
+  .slide-content {
+    padding: 10px;
+    margin-top: 10px;
+    height: 340px;
+  }
+
+  h1 {
+    margin-top: 50px;
+  }
+
+  ul {
+    padding-left: 25px;
+  }
+}
+
+@media print {
+  * {
+    -webkit-print-color-adjust: exact;
+  }
+
+  @page {
+    size: letter;
+  }
+
+  .hidden {
+    display: inline;
+  }
+
+  html {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  body {
+    margin: 0 auto !important;
+    border: 0;
+    padding: 0;
+    float: none !important;
+    overflow: visible;
+    background: none !important;
+    font-size: 52%;
+  }
+
+  .progress, .controls {
+    display: none;
+  }
+
+  .slide {
+    position: static;
+  }
+
+  .slide-content {
+    border: 1px solid #222;
+    margin-top: 0;
+    margin-bottom: 40px;
+    height: 3.5in;
+    overflow: visible;
+  }
+
+  .slide:nth-child(even) {
+    /* 2 slides per page */
+    page-break-before: always;
+  }
+}
+
+/*
+
+github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+
+*/
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  color: #333;
+  background: #f8f8f8;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #998;
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-subst {
+  color: #333;
+  font-weight: bold;
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag .hljs-attr {
+  color: #008080;
+}
+
+.hljs-string,
+.hljs-doctag {
+  color: #d14;
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-selector-id {
+  color: #900;
+  font-weight: bold;
+}
+
+.hljs-subst {
+  font-weight: normal;
+}
+
+.hljs-type,
+.hljs-class .hljs-title {
+  color: #458;
+  font-weight: bold;
+}
+
+.hljs-tag,
+.hljs-name,
+.hljs-attribute {
+  color: #000080;
+  font-weight: normal;
+}
+
+.hljs-regexp,
+.hljs-link {
+  color: #009926;
+}
+
+.hljs-symbol,
+.hljs-bullet {
+  color: #990073;
+}
+
+.hljs-built_in,
+.hljs-builtin-name {
+  color: #0086b3;
+}
+
+.hljs-meta {
+  color: #999;
+  font-weight: bold;
+}
+
+.hljs-deletion {
+  background: #fdd;
+}
+
+.hljs-addition {
+  background: #dfd;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+
+  </style>
+</head>
+<body>
+    <div class="progress">
+    <div class="progress-bar"></div>
+  </div>
+
+  <div class="slide " id="slide-1">
+    <section class="slide-content"><h1 id="-">变量</h1>
+<p>JavaScript 的类型分为两种：原始数据类型（Primitive data types）和对象类型（Object types）。  </p>
+<p>原始数据类型:按值传递<br>对象类型：按引用传递<br>变量则是他们的载体</p>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-2">
+    <section class="slide-content"><p>在 ES6 以前，<br>声明一个变量只有两种方式 —— <code>var</code> 和 <code>function</code>  </p>
+<p><code>let</code>，<code>const</code>命令的用法类似于<code>var</code>，但是所声明的变量，只在声明所在的块级作用域内有效。</p>
+<pre><code class="lang-javascript">{
+  <span class="hljs-keyword">let</span> a = <span class="hljs-number">1</span>
+  <span class="hljs-keyword">const</span> b = <span class="hljs-number">2</span>
+  <span class="hljs-keyword">var</span> c = <span class="hljs-number">3</span>
+}
+a <span class="hljs-comment">// ReferenceError: a is not defined.</span>
+b <span class="hljs-comment">// ReferenceError: b is not defined.</span>
+c <span class="hljs-comment">// 3</span>
+</code></pre>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-3">
+    <section class="slide-content"><p>在ES6以前，由于存在变量提升，<code>var</code>定义的变量可以在声明之前就调用而不报错，而<code>let</code>，<code>const</code>必须先声明后使用</p>
+<p><code>const</code>一旦声明，就必须立即初始化，值就不能改变。</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> a = <span class="hljs-number">1</span>
+<span class="hljs-keyword">let</span> a = <span class="hljs-number">2</span>
+<span class="hljs-comment">// Uncaught SyntaxError: Identifier 'a' has already been declared</span>
+<span class="hljs-keyword">const</span> YEAR = <span class="hljs-number">2017</span>
+YEAR = <span class="hljs-number">2018</span>
+<span class="hljs-comment">// TypeError: Assignment to constant variable.</span>
+</code></pre>
+<p><code>const</code>实际上保证的，并不是变量的值不得改动，而<code>是变量指向的那个内存地址不得改动</code>。对于简单类型的数据（数值、字符串、布尔值），值就保存在变量指向的那个内存地址，因此等同于常量。</p>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-4">
+    <section class="slide-content"><h1 id="-">变量的解构赋值</h1>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-5">
+    <section class="slide-content"><h2 id="-">数组的解构赋值</h2>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> a = <span class="hljs-number">1</span>;
+<span class="hljs-keyword">let</span> b = <span class="hljs-number">2</span>;
+<span class="hljs-keyword">let</span> c = <span class="hljs-number">3</span>;
+</code></pre>
+<p>等同于ES6:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> [a,b,c]=[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>]
+</code></pre>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-6">
+    <section class="slide-content"><h2 id="-">对象的解构赋值</h2>
+<p>对象的解构与数组有一个重要的不同。<br>数组的元素是按次序排列的，<code>变量的取值由它的位置决定</code>；<br>而对象的属性没有次序，<code>变量必须与属性同名，才能取到正确的值</code>。  </p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> { bar, foo } = { <span class="hljs-attr">foo</span>: <span class="hljs-string">"aaa"</span>, <span class="hljs-attr">bar</span>: <span class="hljs-string">"bbb"</span> };
+foo <span class="hljs-comment">// "aaa"</span>
+bar <span class="hljs-comment">// "bbb"</span>
+
+<span class="hljs-keyword">let</span> { baz } = { <span class="hljs-attr">foo</span>: <span class="hljs-string">"aaa"</span>, <span class="hljs-attr">bar</span>: <span class="hljs-string">"bbb"</span> };
+baz <span class="hljs-comment">// undefined</span>
+
+<span class="hljs-keyword">let</span> {a,...other}={<span class="hljs-attr">a</span>:<span class="hljs-number">1</span>,<span class="hljs-attr">b</span>:<span class="hljs-number">2</span>,<span class="hljs-attr">c</span>:<span class="hljs-number">3</span>}
+
+</code></pre>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-7">
+    <section class="slide-content"><p>如果变量名与属性名不一致，必须写成下面这样。</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> { <span class="hljs-attr">foo</span>: baz } = { <span class="hljs-attr">foo</span>: <span class="hljs-string">'aaa'</span>, <span class="hljs-attr">bar</span>: <span class="hljs-string">'bbb'</span> };
+baz <span class="hljs-comment">// "aaa"</span>
+
+<span class="hljs-keyword">let</span> obj = { <span class="hljs-attr">first</span>: <span class="hljs-string">'hello'</span>, <span class="hljs-attr">last</span>: <span class="hljs-string">'world'</span> };
+<span class="hljs-keyword">let</span> { <span class="hljs-attr">first</span>: f, <span class="hljs-attr">last</span>: l } = obj;
+f <span class="hljs-comment">// 'hello'</span>
+l <span class="hljs-comment">// 'world'</span>
+</code></pre>
+<p>这实际上说明，对象的解构赋值是下面形式的简写</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> { <span class="hljs-attr">foo</span>: foo, <span class="hljs-attr">bar</span>: bar } = { <span class="hljs-attr">foo</span>: <span class="hljs-string">"aaa"</span>, <span class="hljs-attr">bar</span>: <span class="hljs-string">"bbb"</span> };
+</code></pre>
+<p>真正被赋值的是后者，而不是前者。</p>
+<h1 id="-">字符串</h1>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-8">
+    <section class="slide-content"><h2 id="padstart-padend-">padStart()，padEnd()</h2>
+<p><code>padStart</code>和<code>padEnd</code>一共接受两个参数，第一个参数用来指定字符串的最小长度，第二个参数是用来补全的字符串。
+如果原字符串的长度，等于或大于指定的最小长度，则返回原字符串。<br>如果用来补全的字符串与原字符串，两者的长度之和超过了指定的最小长度，则会截去超出位数的补全字符串。</p>
+<pre><code class="lang-javascript"><span class="hljs-string">'xxx'</span>.padStart(<span class="hljs-number">2</span>, <span class="hljs-string">'ab'</span>) <span class="hljs-comment">// 'xxx'</span>
+<span class="hljs-string">'xxx'</span>.padEnd(<span class="hljs-number">2</span>, <span class="hljs-string">'ab'</span>) <span class="hljs-comment">// 'xxx'</span>
+<span class="hljs-string">'abc'</span>.padStart(<span class="hljs-number">10</span>, <span class="hljs-string">'0123456789'</span>)
+<span class="hljs-comment">// '0123456abc'</span>
+</code></pre>
+<p>padStart的常见用途是为数值补全指定位数。下面代码生成 10 位的数值字符串。</p>
+<pre><code class="lang-javascript"><span class="hljs-string">'1'</span>.padStart(<span class="hljs-number">10</span>, <span class="hljs-string">'0'</span>) <span class="hljs-comment">// "0000000001"</span>
+<span class="hljs-string">'12'</span>.padStart(<span class="hljs-number">10</span>, <span class="hljs-string">'0'</span>) <span class="hljs-comment">// "0000000012"</span>
+<span class="hljs-string">'123456'</span>.padStart(<span class="hljs-number">10</span>, <span class="hljs-string">'0'</span>) <span class="hljs-comment">// "0000123456"</span>
+</code></pre>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-9">
+    <section class="slide-content"><h2 id="-">模板字符串</h2>
+<p>模板字符串（template string）是增强版的字符串，用反引号（`）标识。它可以当作普通字符串使用，也可以用来定义多行字符串，或者在字符串中嵌入变量。</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// 普通字符串</span>
+<span class="hljs-string">`In JavaScript '\n' is a line-feed.`</span>
+
+<span class="hljs-comment">// 多行字符串</span>
+<span class="hljs-string">`In JavaScript this is
+ not legal.`</span>
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">`string text line 1
+string text line 2`</span>);
+
+<span class="hljs-comment">// 字符串中嵌入变量</span>
+<span class="hljs-keyword">let</span> name = <span class="hljs-string">"Bob"</span>, time = <span class="hljs-string">"today"</span>;
+<span class="hljs-string">`Hello <span class="hljs-subst">${name}</span>, how are you <span class="hljs-subst">${time}</span>?`</span>
+</code></pre>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-10">
+    <section class="slide-content"><h1 id="-">数值的扩展</h1>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-11">
+    <section class="slide-content"><h2 id="math-trunc-">Math.trunc()</h2>
+<p>Math.trunc方法用于去除一个数的小数部分，返回整数部分。</p>
+<pre><code class="lang-javascript"><span class="hljs-built_in">Math</span>.trunc(<span class="hljs-number">4.1</span>) <span class="hljs-comment">// 4</span>
+<span class="hljs-built_in">Math</span>.trunc(<span class="hljs-number">4.9</span>) <span class="hljs-comment">// 4</span>
+<span class="hljs-built_in">Math</span>.trunc(<span class="hljs-number">-4.1</span>) <span class="hljs-comment">// -4</span>
+<span class="hljs-built_in">Math</span>.trunc(<span class="hljs-number">-4.9</span>) <span class="hljs-comment">// -4</span>
+<span class="hljs-built_in">Math</span>.trunc(<span class="hljs-number">-0.1234</span>) <span class="hljs-comment">// -0</span>
+</code></pre>
+<h2 id="isnan-">isNaN()</h2>
+<p>在ES6以前，我们使用isNaN这个全局方法判断一个值或者变量是否是NaN</p>
+<p>在ES6中，Number对象上也添加了isNaN方法,并且与以前的isNaN有重要的区别</p>
+<pre><code class="lang-javascript"><span class="hljs-built_in">isNaN</span>(<span class="hljs-string">"NaN"</span>)<span class="hljs-comment">//true</span>
+<span class="hljs-built_in">Number</span>.isNaN(<span class="hljs-string">"NaN"</span>)<span class="hljs-comment">//false</span>
+</code></pre>
+<p>显然，以前的<code>isNaN</code>方法在判断之前，先对不是number类型的&quot;NaN&quot;做了隐式转换，变成了NaN，而Number.isNaN不会转换</p>
+<p>可以简单的理解成 == 和 === 的区别</p>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-12">
+    <section class="slide-content"><h2 id="-">指数运算符</h2>
+<p>ES6 新增了一个指数运算符（<code>**</code>）。</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> a = <span class="hljs-number">1.5</span>;
+a **= <span class="hljs-number">2</span>;
+<span class="hljs-comment">// 等同于 a = a * a;</span>
+<span class="hljs-keyword">let</span> b = <span class="hljs-number">4</span>;
+b **= <span class="hljs-number">3</span>;
+<span class="hljs-comment">// 等同于 b = b * b * b;</span>
+</code></pre>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-13">
+    <section class="slide-content"><h1 id="-">数组</h1>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-14">
+    <section class="slide-content"><h2 id="-">扩展运算符</h2>
+<p>扩展运算符写作三个点（<code>...</code>），可以把一个可遍历的对象解开，转为用逗号分隔的序列</p>
+<pre><code class="lang-javascript"><span class="hljs-built_in">console</span>.log(...[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>])
+<span class="hljs-comment">// 1 2 3</span>
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-number">1</span>, ...[<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>], <span class="hljs-number">5</span>)
+<span class="hljs-comment">// 1 2 3 4 5</span>
+
+[...document.querySelectorAll(<span class="hljs-string">'div'</span>)]
+<span class="hljs-comment">// [&lt;div&gt;, &lt;div&gt;, &lt;div&gt;]</span>
+
+[...<span class="hljs-string">'abc'</span>]
+<span class="hljs-comment">// ["a", "b", "c"]</span>
+</code></pre>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-15">
+    <section class="slide-content"><h3 id="-">扩展运算符的应用</h3>
+<ul>
+<li>复制数组<br>在ES6以前<pre><code class="lang-javascript"><span class="hljs-comment">//使用slice方法</span>
+<span class="hljs-keyword">const</span> a1 = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>]
+<span class="hljs-keyword">const</span> a2 = [].slice.call(a1)
+<span class="hljs-comment">//使用concat方法</span>
+<span class="hljs-keyword">const</span> a1 = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>]
+<span class="hljs-keyword">const</span> a2 = a1.concat()
+</code></pre>
+在ES6中<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> a1 = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>]
+<span class="hljs-keyword">const</span> a2 = [...a1]
+</code></pre>
+</li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-16">
+    <section class="slide-content"><ul>
+<li>合并数组  </li>
+</ul>
+<pre><code class="lang-javascript"><span class="hljs-comment">// ES5</span>
+[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>].concat(more)
+<span class="hljs-comment">// ES6</span>
+[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, ...more]
+
+<span class="hljs-keyword">var</span> arr1 = [<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>];
+<span class="hljs-keyword">var</span> arr2 = [<span class="hljs-string">'c'</span>];
+<span class="hljs-keyword">var</span> arr3 = [<span class="hljs-string">'d'</span>, <span class="hljs-string">'e'</span>];
+
+<span class="hljs-comment">// ES5的合并数组</span>
+arr1.concat(arr2, arr3);
+<span class="hljs-comment">// [ 'a', 'b', 'c', 'd', 'e' ]</span>
+
+<span class="hljs-comment">// ES6的合并数组</span>
+[...arr1, ...arr2, ...arr3]
+<span class="hljs-comment">// [ 'a', 'b', 'c', 'd', 'e' ]</span>
+</code></pre>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-17">
+    <section class="slide-content"><ul>
+<li>与解构赋值结合  <pre><code class="lang-javascript"><span class="hljs-comment">// ES5</span>
+a = list[<span class="hljs-number">0</span>], rest = list.slice(<span class="hljs-number">1</span>)
+<span class="hljs-comment">// ES6</span>
+[a, ...rest] = list
+</code></pre>
+list是一个数组，给变量a赋值为数组的第一个元素，变量rest为数组剩下的元素组成的数组。<br>如果将扩展运算符用于数组赋值，只能放在参数的最后一位，否则会报错。  </li>
+</ul>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> [...butLast, last] = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>];
+<span class="hljs-comment">// 报错</span>
+
+<span class="hljs-keyword">const</span> [first, ...middle, last] = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>];
+<span class="hljs-comment">// 报错</span>
+</code></pre>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-18">
+    <section class="slide-content"><h2 id="array-from-">Array.from()</h2>
+<p><code>Array.from</code>方法用于将两类对象转为真正的数组：类似数组的对象（array-like object）和可遍历（iterable）的对象（包括 ES6 新增的数据结构 Set 和 Map）。  </p>
+<p>下面是一个类似数组的对象，Array.from将它转为真正的数组。</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> arrayLike = {
+    <span class="hljs-string">'0'</span>: <span class="hljs-string">'a'</span>,
+    <span class="hljs-string">'1'</span>: <span class="hljs-string">'b'</span>,
+    <span class="hljs-string">'2'</span>: <span class="hljs-string">'c'</span>,
+    <span class="hljs-attr">length</span>: <span class="hljs-number">3</span>
+};
+
+<span class="hljs-comment">// ES5的写法</span>
+<span class="hljs-keyword">var</span> arr1 = [].slice.call(arrayLike); <span class="hljs-comment">// ['a', 'b', 'c']</span>
+
+<span class="hljs-comment">// ES6的写法</span>
+<span class="hljs-keyword">let</span> arr2 = <span class="hljs-built_in">Array</span>.from(arrayLike); <span class="hljs-comment">// ['a', 'b', 'c']</span>
+</code></pre>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-19">
+    <section class="slide-content"><h2 id="array-of-">Array.of()</h2>
+<p><code>Array.of</code>方法用于将一组值，转换为数组。  </p>
+<p>这个方法的主要目的，是弥补数组构造函数<code>Array()</code>的不足。因为参数个数的不同，会导致<code>Array()</code>的行为有差异。</p>
+<pre><code class="lang-javascript"><span class="hljs-built_in">Array</span>() <span class="hljs-comment">// []</span>
+<span class="hljs-built_in">Array</span>(<span class="hljs-number">3</span>) <span class="hljs-comment">// [, , ,]</span>
+<span class="hljs-built_in">Array</span>(<span class="hljs-number">3</span>, <span class="hljs-number">11</span>, <span class="hljs-number">8</span>) <span class="hljs-comment">// [3, 11, 8]</span>
+</code></pre>
+<p>上面代码中，<code>Array</code>方法没有参数、一个参数、三个参数时，返回结果都不一样。只有当参数个数不少于 2 个时，<code>Array()</code>才会返回由参数组成的新数组。参数个数只有一个时，实际上是指定数组的长度。  </p>
+<p><code>Array.of</code>基本上可以用来替代<code>Array()</code>或<code>new Array()</code>，并且不存在由于参数不同而导致的重载。它的行为非常统一。</p>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-20">
+    <section class="slide-content"><pre><code class="lang-javascript"><span class="hljs-built_in">Array</span>.of() <span class="hljs-comment">// []</span>
+<span class="hljs-built_in">Array</span>.of(<span class="hljs-literal">undefined</span>) <span class="hljs-comment">// [undefined]</span>
+<span class="hljs-built_in">Array</span>.of(<span class="hljs-number">1</span>) <span class="hljs-comment">// [1]</span>
+<span class="hljs-built_in">Array</span>.of(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>) <span class="hljs-comment">// [1, 2]</span>
+</code></pre>
+<p><code>Array.of</code>总是返回参数值组成的数组。如果没有参数，就返回一个空数组。</p>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-21">
+    <section class="slide-content"><h2 id="-find-findindex-">数组实例的 find() 和 findIndex()</h2>
+<p>数组实例的<code>find</code>方法，用于找出第一个符合条件的数组成员。它的参数是一个回调函数，所有数组成员依次执行该回调函数，直到找出第一个返回值为<code>true</code>的成员，然后返回该成员。如果没有符合条件的成员，则返回<code>undefined</code>。</p>
+<pre><code class="lang-javascript">[<span class="hljs-number">1</span>, <span class="hljs-number">4</span>, <span class="hljs-number">-5</span>, <span class="hljs-number">10</span>].find(<span class="hljs-function">(<span class="hljs-params">n</span>) =&gt;</span> n &lt; <span class="hljs-number">0</span>)
+<span class="hljs-comment">// -5</span>
+</code></pre>
+<p><code>find</code>方法的回调函数可以接受三个参数，依次为当前的值、当前的位置、原数组。</p>
+<pre><code class="lang-javascript">[<span class="hljs-number">1</span>, <span class="hljs-number">5</span>, <span class="hljs-number">10</span>, <span class="hljs-number">15</span>].find(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">value, index, arr</span>) </span>{
+  <span class="hljs-keyword">return</span> value &gt; <span class="hljs-number">9</span>;
+}) <span class="hljs-comment">// 10</span>
+<span class="hljs-comment">// -5</span>
+</code></pre>
+<p>数组实例的<code>findIndex</code>方法的用法与<code>find</code>方法非常类似，返回第一个符合条件的数组成员的位置，如果所有成员都不符合条件，则返回-1。  </p>
+<pre><code class="lang-javascript">[<span class="hljs-number">1</span>, <span class="hljs-number">5</span>, <span class="hljs-number">10</span>, <span class="hljs-number">15</span>].findIndex(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">value, index, arr</span>) </span>{
+  <span class="hljs-keyword">return</span> value &gt; <span class="hljs-number">9</span>;
+}) <span class="hljs-comment">// 2</span>
+</code></pre>
+<h2 id="-fill-">数组实例的 fill()</h2>
+<p><code>fill</code>方法使用给定值，填充一个数组。</p>
+<pre><code class="lang-javascript">[<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>].fill(<span class="hljs-number">7</span>)
+<span class="hljs-comment">// [7, 7, 7]</span>
+
+<span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(<span class="hljs-number">3</span>).fill(<span class="hljs-number">7</span>)
+<span class="hljs-comment">// [7, 7, 7]</span>
+</code></pre>
+<p>上面代码表明，fill方法用于空数组的初始化非常方便。数组中已有的元素，会被全部抹去。  </p>
+<p><code>fill</code>方法还可以接受第二个和第三个参数，用于指定填充的起始位置和结束位置。</p>
+<pre><code class="lang-javascript">[<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>, <span class="hljs-string">'c'</span>].fill(<span class="hljs-number">7</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>)
+<span class="hljs-comment">// ['a', 7, 'c']</span>
+</code></pre>
+<p>上面代码表示，<code>fill</code>方法从 1 号位开始，向原数组填充 7，到 2 号位之前结束。</p>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-22">
+    <section class="slide-content"><h2 id="-includes-">数组实例的 includes()</h2>
+<p><code>Array.prototype.includes</code>方法返回一个布尔值，表示某个数组是否包含给定的值，与字符串的includes方法类似。</p>
+<pre><code class="lang-javascript">[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>].includes(<span class="hljs-number">2</span>)     <span class="hljs-comment">// true</span>
+[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>].includes(<span class="hljs-number">4</span>)     <span class="hljs-comment">// false</span>
+[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-literal">NaN</span>].includes(<span class="hljs-literal">NaN</span>) <span class="hljs-comment">// true</span>
+</code></pre>
+<p>没有该方法之前，我们通常使用数组的<code>indexOf</code>方法，检查是否包含某个值。</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">if</span> (arr.indexOf(el) !== <span class="hljs-number">-1</span>) {
+  <span class="hljs-comment">// ...</span>
+}
+</code></pre>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-23">
+    <section class="slide-content"><h1 id="-">函数</h1>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-24">
+    <section class="slide-content"><h2 id="-">箭头函数</h2>
+<p>ES6 允许使用“箭头”（<code>=&gt;</code>）定义函数。</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> f = <span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> v
+</code></pre>
+<p>箭头左侧是参数，右侧是函数要执行的代码  </p>
+<p>如果要执行的代码只有一条语句，这条语句的运行结果就是函数的返回值，上面的例子相当于：</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> f = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">v</span>) </span>{
+  <span class="hljs-keyword">return</span> v
+}
+</code></pre>
+<p>如果箭头函数的代码块部分多于一条语句，就必须使用大括号将它们括起来，并使用<code>return</code>语句返回。</p>
+<p>如果箭头函数的参数不是一个（没有参数或大于一个），需要使用一个圆括号包裹参数</p>
+<pre><code class="lang-javascript">(num1, num2) =&gt; {
+  <span class="hljs-keyword">let</span> num3 = <span class="hljs-number">3</span>
+  <span class="hljs-keyword">return</span> num1 + num2 + num3
+}
+</code></pre>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-25">
+    <section class="slide-content"><p>需要注意的是，箭头函数没有<code>arguments</code>对象  </p>
+<p>并且箭头函数内部的<code>this</code>被绑定为它定义时所在的对象，而不是随着调用方式不同而改变  </p>
+<p>箭头函数中取消了<code>arguments</code>对象，是因为ES6中有了更好的替代方式：扩展运算符</p>
+<p>之前我们在数组一节提到过扩展运算符，用来展开一个可遍历的对象  </p>
+<p>如果扩展运算符写在函数的参数中，则称作<code>rest</code>参数，是扩展运算符的逆运算</p>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-26">
+    <section class="slide-content"><h2 id="rest-">rest 参数</h2>
+<p>ES6 引入 <code>rest</code> 参数（形式为<code>...变量名</code>），用于获取函数的多余参数，这样就不需要使用<code>arguments</code>对象了。</p>
+<pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">...rest</span>)</span>{
+    <span class="hljs-built_in">console</span>.log(rest)<span class="hljs-comment">//[1,2,3,4,5,6]</span>
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Array</span>.isArray(rest))<span class="hljs-comment">//true</span>
+}
+foo(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>)
+</code></pre>
+<p>显然我们输入的参数是逗号分隔的序列，被<code>...</code>操作符合成了一个数组，以此可以替代<code>arguments</code>对象</p>
+<p>注意，只有<code>...</code>操作符写在函数的参数中，才是合并的效果，写在其他地方都是展开的效果</p>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-27">
+    <section class="slide-content"><h2 id="-">函数参数的默认值</h2>
+<p>在ES6中，我们可以直接给函数参数设置默认值</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> log = <span class="hljs-function">(<span class="hljs-params">x, y = <span class="hljs-string">'World'</span></span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(x, y)
+
+log(<span class="hljs-string">'Hello'</span>) <span class="hljs-comment">// Hello World</span>
+log(<span class="hljs-string">'Hello'</span>, <span class="hljs-string">'China'</span>) <span class="hljs-comment">// Hello China</span>
+log(<span class="hljs-string">'Hello'</span>, <span class="hljs-string">''</span>) <span class="hljs-comment">// Hello</span>
+</code></pre>
+<p>注意这种默认值的声明方式与<code>let</code>类似，函数代码块中不能用<code>let</code>或<code>const</code>再次声明同一个参数</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> foo = <span class="hljs-function">(<span class="hljs-params">x = <span class="hljs-number">5</span></span>) =&gt;</span> {
+    <span class="hljs-keyword">let</span> x = <span class="hljs-number">1</span>  <span class="hljs-comment">// error</span>
+    <span class="hljs-keyword">const</span> x = <span class="hljs-number">2</span>  <span class="hljs-comment">// error</span>
+}
+</code></pre>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-28">
+    <section class="slide-content"><h1 id="-">对象</h1>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-29">
+    <section class="slide-content"><h2 id="-">属性的简洁表示法</h2>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> foo = <span class="hljs-string">'bar'</span>
+
+<span class="hljs-keyword">let</span> baz = {foo}
+<span class="hljs-comment">// 等同于</span>
+<span class="hljs-keyword">let</span> baz = {<span class="hljs-attr">foo</span>: foo}
+<span class="hljs-keyword">let</span> obj = {
+  method () {}
+}
+<span class="hljs-comment">// 等同于</span>
+<span class="hljs-keyword">let</span> obj = {
+  <span class="hljs-attr">method</span>: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {}
+}
+</code></pre>
+<p>上面例子表明，在对象中，可以直接写变量，属性名就是变量名, 属性值就是变量的值，方法也同理</p>
+<p>ES6中，对象的属性名可以使用表达式</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> obj = {
+    [<span class="hljs-string">'a'</span> + <span class="hljs-string">'bc'</span>]: <span class="hljs-number">123</span>,
+    [<span class="hljs-string">'h'</span> + <span class="hljs-string">'ello'</span>]() {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">'hello world!'</span>;
+    }
+}
+<span class="hljs-built_in">console</span>.log(obj.abc)
+<span class="hljs-comment">// 123</span>
+<span class="hljs-built_in">console</span>.log(obj.hello())
+<span class="hljs-comment">// hello world!</span>
+</code></pre>
+<p>很好理解，js解析器会先执行属性名表达式，得到的结果作为真正的属性名，这个表达式<code>[]</code>必须用方括号包裹</p>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-30">
+    <section class="slide-content"><h2 id="object-assign-">Object.assign()</h2>
+<p><code>Object.assign</code>方法用于对象的合并，接收的参数是任意个对象，会依次把第2，3，4...n个对象合并到第一个对象上，如果有重复的属性名，后来的会覆盖先前的。</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> obj = {
+    <span class="hljs-attr">a</span>:<span class="hljs-number">1</span>
+}
+<span class="hljs-built_in">Object</span>.assign(obj,{<span class="hljs-attr">b</span>:<span class="hljs-number">2</span>},{<span class="hljs-attr">c</span>:<span class="hljs-number">3</span>},{<span class="hljs-attr">a</span>:<span class="hljs-number">4</span>})
+obj <span class="hljs-comment">//{a:4,b:2,c:3}</span>
+</code></pre>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-31">
+    <section class="slide-content"><h2 id="object-is-">Object.is()</h2>
+<p><code>Object.is</code> 方法用于判断两个值是否相等
+以前我们判断两个值相等可以用<code>==</code>和<code>===</code></p>
+<p>不过<code>==</code>会发生隐式转换，<code>===</code>无法判断NaN</p>
+<p>Object.is与<code>===</code>不同之处只有两个：一是<code>+0</code>不等于<code>-0</code>，二是<code>NaN</code>等于自身。</p>
+<pre><code class="lang-javascript">+<span class="hljs-number">0</span> === <span class="hljs-number">-0</span> <span class="hljs-comment">//true</span>
+<span class="hljs-literal">NaN</span> === <span class="hljs-literal">NaN</span> <span class="hljs-comment">// false</span>
+
+<span class="hljs-built_in">Object</span>.is(+<span class="hljs-number">0</span>, <span class="hljs-number">-0</span>) <span class="hljs-comment">// false</span>
+<span class="hljs-built_in">Object</span>.is(<span class="hljs-literal">NaN</span>, <span class="hljs-literal">NaN</span>) <span class="hljs-comment">// true</span>
+</code></pre>
+<h2 id="gettersetter">getter&amp;setter</h2>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> obj = {
+    <span class="hljs-attr">a</span>:<span class="hljs-number">2</span>
+}
+obj.a  <span class="hljs-comment">//执行了一次[[Get]]操作</span>
+<span class="hljs-keyword">let</span> myObject = {
+    <span class="hljs-comment">// 为`a`定义一个getter</span>
+    get a() {
+        <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;
+    }
+};
+<span class="hljs-built_in">Object</span>.defineProperty(
+    myObject,    <span class="hljs-comment">// 目标对象</span>
+    <span class="hljs-string">"b"</span>,        <span class="hljs-comment">// 属性名</span>
+    {            <span class="hljs-comment">// 描述符</span>
+        <span class="hljs-comment">// 为`b`定义getter</span>
+        get: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{ <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.a * <span class="hljs-number">2</span> },
+
+        <span class="hljs-comment">// 确保`b`作为对象属性出现</span>
+        enumerable: <span class="hljs-literal">true</span>
+    }
+);
+myObject.a; <span class="hljs-comment">// 2</span>
+
+myObject.b; <span class="hljs-comment">// 4</span>
+</code></pre>
+<h1 id="-setmap-">集合与映射（Set&amp;Map）</h1>
+<p>多数主流编程语言都提供了若干种复杂数据结构，而在ES6以前，js只有数组和对象两种</p>
+<p>ES6为了弥补这一方面的不足，引入了四种新的数据结构</p>
+<p>它们分别是：映射(<code>Map</code>)、集合(<code>Set</code>)、弱集合(<code>WeakSet</code>)和弱映射(<code>WeakMap</code>)</p>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-32">
+    <section class="slide-content"><h2 id="set">Set</h2>
+<p>Set类似数组，但是成员的值都是唯一的，没有重复的值</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> set = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Set</span>([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>])
+<span class="hljs-built_in">console</span>.log(set)
+<span class="hljs-comment">// Set(3) {1, 2, 3}</span>
+[...set]
+<span class="hljs-comment">// [1, 2, 3]</span>
+</code></pre>
+<p>我们可以通过给<code>Set</code>构造函数传入一个数组来创建一个<code>set</code>，数组中的重复值被自动删除</p>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-33">
+    <section class="slide-content"><p><code>set</code>常用的方法不多，常见的有以下几种</p>
+<ul>
+<li><code>add(value)</code>：添加某个值，返回Set结构本身</li>
+<li><code>delete(value)</code>：删除某个值，返回一个布尔值，表示删除是否成功</li>
+<li><code>has(value)</code>：返回一个布尔值，表示该值是否为Set的成员</li>
+<li><code>clear()</code>：清除所有成员，没有返回值
+另外，<code>set</code>通过<code>size</code>属性拿到内部成员的个数，而不是数组的<code>length</code></li>
+</ul>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-34">
+    <section class="slide-content"><h2 id="map">Map</h2>
+<p>常见的<code>Map</code>用法是接受一个数组作为参数，该数组的成员是一个个表示键值对的数组。  </p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> map = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Map</span>([
+  [<span class="hljs-string">'a'</span>, <span class="hljs-string">'1'</span>],
+  [<span class="hljs-string">'b'</span>, <span class="hljs-string">'2'</span>]
+])
+<span class="hljs-built_in">console</span>.log(map)
+<span class="hljs-comment">// Map(2) {"a" =&gt; "1", "b" =&gt; "2"}</span>
+</code></pre>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-35">
+    <section class="slide-content"><p>与<code>Set</code>相同，<code>Map</code>也用<code>size</code>属性表示内部有多少个键值对</p>
+<p>但是从<code>Map</code>中新增，获取值使用<code>set</code>，<code>get</code>方法，其他的<code>has</code>，<code>delete</code>方法与<code>Set</code>相同</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> m = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Map</span>()
+<span class="hljs-keyword">let</span> o = {<span class="hljs-attr">p</span>: <span class="hljs-string">'Hello World'</span>}
+
+m.set(o, <span class="hljs-string">'content'</span>)
+m.get(o) <span class="hljs-comment">// "content"</span>
+
+m.has(o) <span class="hljs-comment">// true</span>
+m.delete(o) <span class="hljs-comment">// true</span>
+m.has(o) <span class="hljs-comment">// false</span>
+</code></pre>
+<p>对比js对象（<code>Object</code>）的优势是，<code>Map</code>可以使用任意值作为键值，包括对象（上面代码中的<code>o</code>）</p>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-36">
+    <section class="slide-content"><h1 id="class">Class</h1>
+<p>ES6以前，生成实例对象的方法是通过构造函数。
+ES6中引入了 <code>Class</code>（类）这个概念，作为对象的模板。通过<code>class</code>关键字，可以定义类。</p>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-37">
+    <section class="slide-content"><pre><code class="lang-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Point</span>(<span class="hljs-params">x,y</span>)</span>{
+    <span class="hljs-keyword">this</span>.x = x
+    <span class="hljs-keyword">this</span>.y = y
+}
+Point.prototype.toString = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-string">'('</span> + <span class="hljs-keyword">this</span>.x + <span class="hljs-string">', '</span> + <span class="hljs-keyword">this</span>.y + <span class="hljs-string">')'</span>
+}
+<span class="hljs-keyword">let</span> p1 = <span class="hljs-keyword">new</span> Point(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>)
+<span class="hljs-comment">//等同于</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Point</span></span>{
+    <span class="hljs-keyword">constructor</span>(x,y){
+        <span class="hljs-keyword">this</span>.x = x
+        <span class="hljs-keyword">this</span>.y = y
+    }
+    toString(){
+        <span class="hljs-keyword">return</span> <span class="hljs-string">'('</span> + <span class="hljs-keyword">this</span>.x + <span class="hljs-string">', '</span> + <span class="hljs-keyword">this</span>.y + <span class="hljs-string">')'</span>;
+    }
+}
+<span class="hljs-keyword">let</span> p1 = <span class="hljs-keyword">new</span> Point(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>)
+</code></pre>
+<p>ES6 明确规定，<code>Class</code> 内部只有静态方法，没有静态属性。</p>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-38">
+    <section class="slide-content"><h2 id="constructor">constructor</h2>
+<p><code>constructor</code>是类的默认方法，使用<code>new</code>命令生成实例时会自动调用该方法。
+通常在<code>constructor</code>中对实例对象的属性进行初始化。</p>
+<h2 id="this-">this指向</h2>
+<p>类的方法内部如果含有<code>this</code>，它默认指向类的实例。</p>
+<h2 id="extends">extends</h2>
+<p>Class 可以通过<code>extends</code>关键字实现继承</p>
+<pre><code class="lang-javascript"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Point</span> </span>{
+}
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ColorPoint</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Point</span> </span>{
+}
+</code></pre>
+<p>上面代码定义了一个<code>ColorPoint</code>类，该类通过<code>extends</code>关键字，继承了<code>Point</code>类的所有属性和方法。</p>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-39">
+    <section class="slide-content"><h3 id="super-">super关键字</h3>
+<p><code>super</code>代表父类的构造函数
+ES6要求，在子类的<code>construtor</code>必须执行一次<code>super</code>函数</p>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-40">
+    <section class="slide-content"><h1 id="module-">Module语法</h1>
+<p>ES6实现了模块功能<br>模块功能主要由两个命令构成：<code>export</code>和<code>import</code>。<br><code>export</code>命令用于规定模块的对外接口，<code>import</code>命令用于输入其他模块提供的功能。</p>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-41">
+    <section class="slide-content"><h2 id="export">export</h2>
+<p><code>export</code>可以暴露模块内部的变量和方法</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> a =<span class="hljs-number">1</span>
+<span class="hljs-keyword">const</span> b = <span class="hljs-function"><span class="hljs-params">()</span>=&gt;</span>{
+    <span class="hljs-comment">//...</span>
+}
+<span class="hljs-keyword">export</span> {a,b}
+<span class="hljs-comment">//或者</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> a = <span class="hljs-number">1</span>
+</code></pre>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-42">
+    <section class="slide-content"><h2 id="import">import</h2>
+<p><code>import</code>命令用来导入其他模块暴露出的变量和方法</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">import</span> {a,b} <span class="hljs-keyword">from</span> <span class="hljs-string">'./module1.js'</span>
+a()
+b()
+</code></pre>
+</section>
+  </div>
+  <div class="slide hidden " id="slide-43">
+    <section class="slide-content"><h3 id="export-default">export default</h3>
+<p><code>export default</code>命令暴露出的变量或方法，在<code>import</code>时可以自定义名字来引入</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">//a.js</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>)</span>{}
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> a
+<span class="hljs-comment">//b.js</span>
+<span class="hljs-keyword">import</span> whatever <span class="hljs-keyword">from</span> <span class="hljs-string">'./a.js'</span>
+whatever()
+</code></pre>
+<p>显然，一个模块只能有一个默认输出，因此<code>export default</code>命令只能使用一次。</p>
+</section>
+  </div>
+  <div class="slide hidden" id="slide-44">
+    <section class="slide-content"></section>
+  </div>
+
+  <div class="controls">
+    <div class="arrow prev"></div>
+    <div class="arrow next"></div>
+  </div>
+
+
+  <script type="text/javascript">
+    /**
+ * Returns the current page number of the presentation.
+ */
+function currentPosition() {
+  return parseInt(document.querySelector('.slide:not(.hidden)').id.slice(6));
+}
+
+
+/**
+ * Navigates forward n pages
+ * If n is negative, we will navigate in reverse
+ */
+function navigate(n) {
+  var position = currentPosition();
+  var numSlides = document.getElementsByClassName('slide').length;
+
+  /* Positions are 1-indexed, so we need to add and subtract 1 */
+  var nextPosition = (position - 1 + n) % numSlides + 1;
+
+  /* Normalize nextPosition in-case of a negative modulo result */
+  nextPosition = (nextPosition - 1 + numSlides) % numSlides + 1;
+
+  document.getElementById('slide-' + position).classList.add('hidden');
+  document.getElementById('slide-' + nextPosition).classList.remove('hidden');
+
+  updateProgress();
+  updateURL();
+  updateTabIndex();
+}
+
+
+/**
+ * Updates the current URL to include a hashtag of the current page number.
+ */
+function updateURL() {
+  try {
+    window.history.replaceState({} , null, '#' + currentPosition());
+  } catch (e) {
+    window.location.hash = currentPosition();
+  }
+}
+
+
+/**
+ * Sets the progress indicator.
+ */
+function updateProgress() {
+  var progressBar = document.querySelector('.progress-bar');
+
+  if (progressBar !== null) {
+    var numSlides = document.getElementsByClassName('slide').length;
+    var position = currentPosition() - 1;
+    var percent = (numSlides === 1) ? 100 : 100 * position / (numSlides - 1);
+    progressBar.style.width = percent.toString() + '%';
+  }
+}
+
+
+/**
+ * Removes tabindex property from all links on the current slide, sets
+ * tabindex = -1 for all links on other slides. Prevents slides from appearing
+ * out of control.
+ */
+function updateTabIndex() {
+  var allLinks = document.querySelectorAll('.slide a');
+  var position = currentPosition();
+  var currentPageLinks = document.getElementById('slide-' + position).querySelectorAll('a');
+  var i;
+
+  for (i = 0; i < allLinks.length; i++) {
+    allLinks[i].setAttribute('tabindex', -1);
+  }
+
+  for (i = 0; i < currentPageLinks.length; i++) {
+    currentPageLinks[i].removeAttribute('tabindex');
+  }
+}
+
+/**
+ * Determines whether or not we are currently in full screen mode
+ */
+function isFullScreen() {
+  return document.fullscreenElement ||
+         document.mozFullScreenElement ||
+         document.webkitFullscreenElement ||
+         document.msFullscreenElement;
+}
+
+/**
+ * Toggle fullScreen mode on document element.
+ * Works on chrome (>= 15), firefox (>= 9), ie (>= 11), opera(>= 12.1), safari (>= 5).
+ */
+function toggleFullScreen() {
+  /* Convenient renames */
+  var docElem = document.documentElement;
+  var doc = document;
+
+  docElem.requestFullscreen =
+      docElem.requestFullscreen ||
+      docElem.msRequestFullscreen ||
+      docElem.mozRequestFullScreen ||
+      docElem.webkitRequestFullscreen.bind(docElem, Element.ALLOW_KEYBOARD_INPUT);
+
+  doc.exitFullscreen =
+      doc.exitFullscreen ||
+      doc.msExitFullscreen ||
+      doc.mozCancelFullScreen ||
+      doc.webkitExitFullscreen;
+
+  isFullScreen() ? doc.exitFullscreen() : docElem.requestFullscreen();
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  // Update the tabindex to prevent weird slide transitioning
+  updateTabIndex();
+
+  // If the location hash specifies a page number, go to it.
+  var page = window.location.hash.slice(1);
+  if (page) {
+    navigate(parseInt(page) - 1);
+  }
+
+  document.onkeydown = function (e) {
+    var kc = e.keyCode;
+
+    // left, down, H, J, backspace, PgUp - BACK
+    // up, right, K, L, space, PgDn - FORWARD
+    // enter - FULLSCREEN
+    if (kc === 37 || kc === 40 || kc === 8 || kc === 72 || kc === 74 || kc === 33) {
+      navigate(-1);
+    } else if (kc === 38 || kc === 39 || kc === 32 || kc === 75 || kc === 76 || kc === 34) {
+      navigate(1);
+    } else if (kc === 13) {
+      toggleFullScreen();
+    }
+  };
+
+  if (document.querySelector('.next') && document.querySelector('.prev')) {
+    document.querySelector('.next').onclick = function (e) {
+      e.preventDefault();
+      navigate(1);
+    };
+
+    document.querySelector('.prev').onclick = function (e) {
+      e.preventDefault();
+      navigate(-1);
+    };
+  }
+});
+
+
+  </script>
+</body>
+</html>
