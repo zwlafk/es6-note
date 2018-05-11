@@ -1,4 +1,3 @@
->https://github.com/JoeHetfield/You-Dont-Know-JS
 # let&const
 JavaScript 的类型分为两种：原始数据类型（Primitive data types）和对象类型（Object types）。
 原始数据类型:按值传递

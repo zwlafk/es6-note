@@ -1,72 +1,47 @@
-// let obj = {
-// }
-// Object.defineProperty(
-//     obj,
-//     'a',
-//     {
-//         configurable: true, 
-//         enumerable: true,
-//         get(){
-//             return this._a
-//         },
-//         set(val){
-//             this._a = val*5
-//         }
-//     }
-// )
+// class Parent{     constructor(){         this.foo()     }     toString(){
+// console.log('string')     } } class Child extends Parent{     foo(){
+// console.log('child')     } }
+class Point {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+}
 
-// describe('definProperty', () => {
-//   it.skip('obj.a',()=>{
-//     obj.a=10
-//     console.log(obj.a)
-//     console.log(obj._a)
-//   })
-  
-// })
+class ColorPoint extends Point {
+    constructor(x, y, color) {
+        super(x, y);
+        this.color = color;
+    }
+}
 
+class A {
+    constructor() {
+        console.log(new.target.name);
+    }
+}
+class B extends A {
+    constructor() {
+        super();
+    }
+}
 
-
-
-// class Parent{
-//     constructor(){
-//         this.foo()
-//     }
-//     toString(){
-//         console.log('string')
-//     }
-// }
-// class Child extends Parent{
-//     foo(){
-//         console.log('child')
-//     }
-// }
-// describe('class',()=>{
-//     it.skip('a',()=>{
-//         let child = new Child()
-//         child.toString()
-//     })
-// })
-
-let arr = [1,2,3,4,5 ,       ,6]
-
-let arr2 = arr.map((v)=>v*v)
-
-let sum = [0, 1, 2, 3].reduce(function (a, b) {
-    return a + b;
-  }, 0)
-
-let arr3 = arr.filter((v)=>v>2)
-
-
-
-describe('Destructuring',()=>{
-    it('...',()=>{
-        console.log(arr2)
-        arr.forEach((element, index, array)=>{
-            console.log("arr[" + index + "] = " + element)
-        })
-        console.log(arr)
-        console.log(sum)
-        console.log(arr3)
+let cp = new ColorPoint();
+describe('class', () => {
+    it('prototype', () => {
+        console.log(ColorPoint.__proto__==Point)
+        
+        console.log(ColorPoint.prototype.__proto__ === Point.prototype)
+        let cp = new ColorPoint
     })
+
+    it.skip('super', () => {
+        let cp = new ColorPoint2()
+    })
+
+    it.skip('"this" in super', () => {
+        new A() // A
+        new B() // B
+    })
+
 })
